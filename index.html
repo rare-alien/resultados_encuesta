@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encuesta: Agro el Jardín de Flores</title>
+    
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        h1, h2 {
+            text-align: center;
+            color: #2c5e2e; /* Verde oscuro para el título */
+        }
+        h1 {
+            font-size: 2em;
+        }
+        h2 {
+            font-size: 1.5em;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 10px;
+        }
+        p.objetivo {
+            text-align: center;
+            font-style: italic;
+            color: #555;
+            margin-bottom: 30px;
+        }
+        form {
+            width: 100%;
+        }
+        .pregunta {
+            margin-bottom: 25px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            border: 1px solid #eee;
+        }
+        .pregunta label.titulo-pregunta {
+            font-weight: bold;
+            font-size: 1.1em;
+            color: #333;
+            display: block;
+            margin-bottom: 15px;
+        }
+        .opcion {
+            margin-bottom: 10px;
+        }
+        .opcion label {
+            font-weight: normal;
+            margin-left: 8px;
+            cursor: pointer;
+        }
+        input[type="radio"],
+        input[type="checkbox"] {
+            cursor: pointer;
+        }
+        input[type="text"],
+        input[type="number"] {
+            width: 90%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        .input-inline {
+            display: flex;
+            align-items: center;
+        }
+        .input-inline input[type="text"] {
+            width: auto;
+            margin-left: 10px;
+        }
+        .grupo-p6 {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+        .grupo-p6 .columna-cantidad {
+            flex: 1;
+        }
+        .grupo-p6 .columna-unidad {
+            flex: 1;
+        }
+        button[type="submit"] {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #ffffff;
+            background-color: #4CAF50; /* Verde principal */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Análisis de Demanda</h1>
+        <h2>Agro el Jardín de Flores</h2>
+        <p class="objetivo">Objetivo: Medir la demanda insatisfecha de insumos agropecuarios en Cárdenas.</p>
+
+        <form id="encuestaForm" action="#" method="POST" onsubmit="alert('Encuesta enviada. ¡Gracias por participar!'); return false;">
+
+            <fieldset>
+                <legend><h2>Sección 1: Filtro y Perfil del Productor</h2></legend>
+
+                <div class="pregunta" id="pregunta1">
+                    <label class="titulo-pregunta">P1. ¿Usted se dedica a la producción agrícola o ganadera en la zona de Cárdenas?</label>
+                    <div class="opcion">
+                        <input type="radio" id="p1_si" name="p1_productor" value="si" onclick="gestionarFiltro()">
+                        <label for="p1_si">Sí</label>
+                    </div>
+                    <div class="opcion">
+                        <input type="radio" id="p1_no" name="p1_productor" value="no" onclick="gestionarFiltro()">
+                        <label for="p1_no">No</label>
+                    </div>
+                </div>
+
+                <div id="restoDelFormulario" style="display:none;">
+
+                    <div class="pregunta" id="pregunta2">
+                        <label class="titulo-pregunta">P2. ¿Cuál es su actividad productiva principal?</label>
+                        <div class="opcion">
+                            <input type="radio" id="p2_ganaderia" name="p2_actividad" value="ganaderia">
+                            <label for="p2_ganaderia">Ganadería (Bovinos)</label>
+                        </div>
+                        <div class="opcion">
+                            <input type="radio" id="p2_agricultura" name="p2_actividad" value="agricultura">
+                            <label for="p2_agricultura">Agricultura (Ej. Caña, Cítricos, Maíz)</label>
+                        </div>
+                        <div class="opcion">
+                            <input type="radio" id="p2_horticultura" name="p2_actividad" value="horticultura">
+                            <label for="p2_horticultura">Horticultura / Vivero / Flores</label>
+                        </div>
+                        <div class="opcion">
+                            <input type="radio" id="p2_avicultura" name="p2_actividad" value="avicultura">
+                            <label for="p2_avicultura">Avicultura / Porcicultura</label>
+                        </div>
+                        <div class="opcion input-inline">
+                            <input type="radio" id="p2_otro" name="p2_actividad" value="otro">
+                            <label for="p2_otro">Otro:</label>
+                            <input type="text" id="p2_otro_texto" name="p2_otro_texto">
+                        </div>
+                    </div>
+                
+            </fieldset>
+
+            <fieldset>
+                <legend><h2>Sección 2: Evaluación de Proveedores Actuales</h2></legend>
+
+                <div class="pregunta" id="pregunta3">
+                    <label class="titulo-pregunta">P3. En una escala de 1 (Muy Insatisfecho) a 5 (Muy Satisfecho), ¿qué tan satisfecho se encuentra con sus proveedores *actuales*?</label>
+                    <div class="opcion">
+                        <input type="radio" id="p3_1" name="p3_satisfaccion" value="1">
+                        <label for="p3_1">(1) Muy Insatisfecho</label>
+                    </div>
+                    <div class="opcion">
+                        <input type="radio" id="p3_2" name="p3_satisfaccion" value="2">
+                        <label for="p3_2">(2) Insatisfecho</label>
+                    </div>
+                    <div class="opcion">
+                        <input type="radio" id="p3_3" name="p3_satisfaccion" value="3">
+                        <label for="p3_3">(3) Neutral</label>
+                    </div>
+                    <div class="opcion">
+                        <input type="radio" id="p3_4" name="p3_satisfaccion" value="4">
+                        <label for="p3_4">(4) Satisfecho</label>
+                    </div>
+                    <div class="opcion">
+                        <input type="radio" id="p3_5" name="p3_satisfaccion" value="5">
+                        <label for="p3_5">(5) Muy Satisfecho</label>
+                    </div>
+                </div>
+
+                <div class="pregunta" id="pregunta4">
+                    <label class="titulo-pregunta">P4. ¿Cuál es el problema MÁS frecuente que enfrenta con sus proveedores actuales?</label>
+                    <div class="opcion">
+                        <input type="radio" id="p4_precios" name="p4_problema" value="precios">
+                        <label for="p4_precios">Precios elevados</label>
+                    </div>
+                    <div class="opcion">
+                        <input type="radio" id="p4_desabasto" name="p4_problema" value="desabasto">
+                        <label for="p4_desabasto">Poca disponibilidad de producto (Desabasto)</label>
+                    </div>
+                    <div class="opcion">
+                        <input type="radio" id="p4_calidad" name="p4_problema" value="baja_calidad">
+                        <label for="p4_calidad">Baja calidad del producto</label>
+                    </div>
+                    <div class="opcion">
+                        <input type="radio" id="p4_servicio" name="p4_problema" value="mal_servicio">
+                        <label for="p4_servicio">Mal servicio o falta de asesoría técnica</label>
+                    </div>
+                    <div class="opcion">
+                        <input type="radio" id="p4_ubicacion" name="p4_problema" value="mala_ubicacion">
+                        <label for="p4_ubicacion">Mala ubicación o tiempos de entrega largos</label>
+                    </div>
+                    <div class="opcion">
+                        <input type="radio" id="p4_credito" name="p4_problema" value="credito_limitado">
+                        <label for="p4_credito">Opciones de crédito limitadas</label>
+                    </div>
+                    <div class="opcion">
+                        <input type="radio" id="p4_sin_problemas" name="p4_problema" value="sin_problemas">
+                        <label for="p4_sin_problemas">No he tenido problemas significativos</label>
+                    </div>
+                </div>
+
+            </fieldset>
+
+            <fieldset>
+                <legend><h2>Sección 3: Cuantificación de la Demanda</h2></legend>
+
+                <div class="pregunta" id="pregunta5">
+                    <label class="titulo-pregunta">P5. ¿Cuáles de los siguientes insumos utiliza REGULARMENTE en su producción? (Marque todos los que apliquen)</label>
+                    <div class="opcion">
+                        <input type="checkbox" id="p5_fertilizantes" name="p5_insumos[]" value="fertilizantes">
+                        <label for="p5_fertilizantes">Fertilizantes (Ej. Urea, Triple 17)</label>
+                    </div>
+                    <div class="opcion">
+                        <input type="checkbox" id="p5_agroquimicos" name="p5_insumos[]" value="agroquimicos">
+                        <label for="p5_agroquimicos">Agroquímicos (Ej. Herbicidas, Pesticidas)</label>
+                    </div>
+                    <div class="opcion">
+                        <input type="checkbox" id="p5_alimento" name="p5_insumos[]" value="alimento_ganado">
+                        <label for="p5_alimento">Alimento para ganado (Ej. Bultos de engorda, sales)</label>
+                    </div>
+                    <div class="opcion">
+                        <input type="checkbox" id="p5_semillas" name="p5_insumos[]" value="semillas">
+                        <label for="p5_semillas">Semillas / Plántulas</label>
+                    </div>
+                    <div class="opcion">
+                        <input type="checkbox" id="p5_veterinarios" name="p5_insumos[]" value="veterinarios">
+                        <label for="p5_veterinarios">Insumos veterinarios</label>
+                    </div>
+                </div>
+
+                <div class="pregunta" id="pregunta6">
+                    <label class="titulo-pregunta">P6. Pensando en el insumo que MÁS compra (o el más importante), ¿qué cantidad aproximada adquiere usted al mes?</label>
+                    <div class="grupo-p6">
+                        <div class="columna-cantidad">
+                            <label for="p6_cantidad">Cantidad:</label>
+                            <input type="number" id="p6_cantidad" name="p6_cantidad" min="0" placeholder="Ej: 10">
+                        </div>
+                        <div class="columna-unidad">
+                            <label>Unidad:</label>
+                            <div class="opcion">
+                                <input type="radio" id="p6_bultos" name="p6_unidad" value="bultos">
+                                <label for="p6_bultos">Bultos</label>
+                            </div>
+                            <div class="opcion">
+                                <input type="radio" id="p6_kilos" name="p6_unidad" value="kilos">
+                                <label for="p6_kilos">Kilos</label>
+                            </div>
+                            <div class="opcion">
+                                <input type="radio" id="p6_litros" name="p6_unidad" value="litros">
+                                <label for="p6_litros">Litros</label>
+                            </div>
+                            <div class="opcion">
+                                <input type="radio" id="p6_arpillas" name="p6_unidad" value="arpillas">
+                                <label for="p6_arpillas">Arpillas</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pregunta" id="pregunta7">
+                    <label class="titulo-pregunta">P7. ¿Con qué frecuencia realiza la compra de este insumo principal?</label>
+                    <div class="opcion">
+                        <input type="radio" id="p7_semanal" name="p7_frecuencia" value="semanal">
+                        <label for="p7_semanal">Semanal</label>
+                    </div>
+                    <div class="opcion">
+                        <input type="radio" id="p7_quincenal" name="p7_frecuencia" value="quincenal">
+                        <label for="p7_quincenal">Quincenal</label>
+                    </div>
+                    <div class="opcion">
+                        <input type="radio" id="p7_mensual" name="p7_frecuencia" value="mensual">
+                        <label for="p7_mensual">Mensual</label>
+                    </div>
+                    <div class="opcion">
+                        <input type="radio" id="p7_temporada" name="p7_frecuencia" value="temporada">
+                        <label for="p7_temporada">Por temporada (cada 3-6 meses)</label>
+                    </div>
+                </div>
+
+            </fieldset>
+
+            <fieldset>
+                <legend><h2>Sección 4: Hipótesis de Cambio</h2></legend>
+
+                <div class="pregunta" id="pregunta8">
+                    <label class="titulo-pregunta">P8. Si una nueva microempresa local ("Agro el Jardín de Flores") le ofreciera una solución a su problema principal (P4), ¿estaría dispuesto a cambiar de proveedor?</label>
+                    <div class="opcion">
+                        <input type="radio" id="p8_si" name="p8_cambio" value="si" onclick="gestionarPregunta9()">
+                        <label for="p8_si">Sí</label>
+                    </div>
+                    <div class="opcion">
+                        <input type="radio" id="p8_no" name="p8_cambio" value="no" onclick="gestionarPregunta9()">
+                        <label for="p8_no">No</label>
+                    </div>
+                    <div class="opcion">
+                        <input type="radio" id="p8_talvez" name="p8_cambio" value="talvez" onclick="gestionarPregunta9()">
+                        <label for="p8_talvez">Tal vez / Dependería</label>
+                    </div>
+                </div>
+
+                <div class="pregunta" id="pregunta9" style="display:none;">
+                    <label class="titulo-pregunta">P9. (Solo si respondió "No" o "Tal vez") ¿Cuál es la razón principal por la que NO cambiaría o dudaría en cambiar?</label>
+                    <div class="opcion">
+                        <input type="radio" id="p9_lealtad" name="p9_razon" value="lealtad">
+                        <label for="p9_lealtad">Lealtad (confianza) a mi proveedor actual</label>
+                    </div>
+                    <div class="opcion">
+                        <input type="radio" id="p9_credito" name="p9_razon" value="credito_existente">
+                        <label for="p9_credito">Tengo un crédito o financiamiento con ellos</label>
+                    </div>
+                    <div class="opcion">
+                        <input type="radio" id="p9_desconfianza" name="p9_razon" value="desconfianza_nueva">
+                        <label for="p9_desconfianza">Desconfianza en empresas nuevas</label>
+                    </div>
+                    <div class="opcion">
+                        <input type="radio" id="p9_logistica" name="p9_razon" value="logistica">
+                        <label for="p9_logistica">Logística (ya tengo mi ruta de compra)</label>
+                    </div>
+                    <div class="opcion input-inline">
+                        <input type="radio" id="p9_otro" name="p9_razon" value="otro">
+                        <label for="p9_otro">Otra:</label>
+                        <input type="text" id="p9_otro_texto" name="p9_otro_texto">
+                    </div>
+                </div>
+
+                <div class="pregunta" id="pregunta10">
+                    <label class="titulo-pregunta">P10. Para fines estadísticos, ¿cuál es el tamaño aproximado de su unidad de producción?</label>
+                    <div class="opcion">
+                        <input type="radio" id="p10_pequeno" name="p10_tamano" value="pequeno">
+                        <label for="p10_pequeno">Menos de 5 hectáreas / Menos de 10 cabezas de ganado</label>
+                    </div>
+                    <div class="opcion">
+                        <input type="radio" id="p10_mediano" name="p10_tamano" value="mediano">
+                        <label for="p10_mediano">Entre 5 y 20 hectáreas / Entre 10 y 50 cabezas</label>
+                    </div>
+                    <div class="opcion">
+                        <input type="radio" id="p10_grande" name="p10_tamano" value="grande">
+                        <label for="p10_grande">Más de 20 hectáreas / Más de 50 cabezas</label>
+                    </div>
+                </div>
+
+            </fieldset>
+
+            <button type="submit">Enviar Encuesta</button>
+
+            </div> </form>
+    </div>
+
+    <script>
+        function gestionarFiltro() {
+            // Revisa si el botón "Sí" de P1 está marcado
+            var p1_si = document.getElementById('p1_si').checked;
+            var restoForm = document.getElementById('restoDelFormulario');
+            
+            // Muestra u oculta el resto del formulario
+            if (p1_si) {
+                restoForm.style.display = 'block';
+            } else {
+                restoForm.style.display = 'none';
+            }
+        }
+
+        function gestionarPregunta9() {
+            // Revisa si "No" o "Tal vez" de P8 están marcados
+            var p8_no = document.getElementById('p8_no').checked;
+            var p8_talvez = document.getElementById('p8_talvez').checked;
+            var pregunta9 = document.getElementById('pregunta9');
+
+            // Muestra u oculta la pregunta 9
+            if (p8_no || p8_talvez) {
+                pregunta9.style.display = 'block';
+            } else {
+                pregunta9.style.display = 'none';
+            }
+        }
+    </script>
+
+</body>
+</html>
